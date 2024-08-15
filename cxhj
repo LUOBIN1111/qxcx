@@ -1,4 +1,4 @@
-hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com,poplayer.template.alibaba.com api.alipan.com, member.alipan.com,list-app-m.i4.cn,pan.baidu.com, ndstatic.cdn.bcebos.com, staticsns.cdn.bcebos.com, issuecdn.baidupcs.com, update.pan.baidu.com, fc-video.cdn.bcebos.com, rp.hpplay.cn,tiebac.baidu.com, *.tieba.baidu.com,app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net,
+hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com,poplayer.template.alibaba.com api.alipan.com, member.alipan.com,list-app-m.i4.cn,pan.baidu.com, ndstatic.cdn.bcebos.com, staticsns.cdn.bcebos.com, issuecdn.baidupcs.com, update.pan.baidu.com, fc-video.cdn.bcebos.com, rp.hpplay.cn,tiebac.baidu.com, *.tieba.baidu.com,app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net,www.baidu.com, fcvbjbcebos.baidu.com, cover.baidu.com, baichuan.baidu.com, api*.tuisong.baidu.com, afd.baidu.com, mobads.baidu.com, issuecdn.baidupcs.com, update.pan.baidu.com, sa*.tuisong.baidu.com, m.baidu.com, sofire.baidu.com,www.binance.info, www.yingwangtech.net, www.binance.com,wrapper.cyapi.cn, api.caiyunapp.com,cn-acs.m.cainiao.com, amdc.m.taobao.com,gw.alicdn.com, img.alicdn.com,capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com,app.dewu.com, cdn.poizon.com,elemecdn.com, fuss10.elemecdn.com, cube.elemecdn.com, www1.elecfans.com, nr-op.elemecdn.com,
 # > 阿里巴巴
 # hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com, poplayer.template.alibaba.com
 ^https:\/\/acs\.m\.taobao\.com\/gw\/mtop\.fliggy\.crm\.screen\.(allresource|predict) url reject-dict
@@ -53,6 +53,26 @@ hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com,poplayer.te
 ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/(c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)$|tiebaads\/commonbatch|c\/s\/sync$) url script-response-body https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js
 ^http(s:\/\/tiebac|:\/\/c\.tieba)\.baidu\.com\/c\/f\/(frs\/(page|threadlist|generalTabList)|pb\/page|excellent\/personalized)\?cmd url script-response-body https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-proto.js
 
+# > 百度
+# hostname = www.baidu.com, fcvbjbcebos.baidu.com, cover.baidu.com, baichuan.baidu.com, api*.tuisong.baidu.com, afd.baidu.com, mobads.baidu.com, issuecdn.baidupcs.com, update.pan.baidu.com, sa*.tuisong.baidu.com, m.baidu.com, sofire.baidu.com
+^https?:\/\/fcvbjbcebos\.baidu\.com\/.+.mp4 url reject
+^https?:\/\/fcvbjbcebos\.baidu\.com\/.+?\.mp4 url reject-img
+^https?:\/\/cover\.baidu\.com\/cover\/page\/dspSwitchAds\/ url reject
+^https?:\/\/baichuan\.baidu\.com\/rs\/adpmobile\/launch url reject
+^https?:\/\/baichuan\.baidu\.com\/rs\/adpmobile\/launch url reject-img
+^https?:\/\/api\d\.tuisong\.baidu\.com url reject-img
+^https?:\/\/afd\.baidu\.com\/afd\/entry url reject
+^https?:\/\/afd\.baidu\.com\/afd\/entry url reject-img
+^https?:\/\/als\.baidu\.com\/clog\/clog url reject
+^https?:\/\/mobads\.baidu\.com\/cpro\/ui\/mads.+ url reject
+^https?:\/\/issuecdn\.baidupcs\.com\/issue\/netdisk\/guanggao\/ url reject-200
+^https?:\/\/[\s\S]*\.baidu\.com/.*?ad[xs]\.php url reject-img
+^https?:\/\/t\d{2}\.baidu\.com url reject-img
+^https?:\/\/update\.pan\.baidu\.com\/statistics url reject
+^https?:\/\/log.+?baidu\.com url reject
+^https?:\/\/sa\d\.tuisong\.baidu\.com url reject-img
+^https?:\/\/www.baidu.com\/?action=static&ms=1&version=css_page_2@0.*? url reject
+
 # > 哔哩哔哩
 # hostname = app.bilibili.com, api.bilibili.com, api.live.bilibili.com, grpc.biliapi.net
 # Proto 动态广告,后台播放限制,播放页广告 //app.bilibili.com
@@ -82,3 +102,68 @@ hostname = acs.m.taobao.com, heic.alicdn.com, guide-acs.m.taobao.com,poplayer.te
 # IP请求,地理位置请求 //api.bilibili.com
 ^https?:\/\/api\.bilibili\.com\/x\/web-interface\/zone\?jsonp url reject-dict
 ^https?:\/\/app\.bilibili\.com\/x\/resource\/ip url reject-dict
+
+# > 币安
+# hostname = www.binance.info, www.yingwangtech.net, www.binance.com
+# 开屏广告
+^https?:\/\/www\.(binance|yingwangtech)\.(com|info|net)\/bapi\/composite\/v1\/public\/market\/holiday-atmosphere url reject-dict
+
+# > 彩云天气
+# hostname = wrapper.cyapi.cn, api.caiyunapp.com
+^https?:\/\/wrapper\.cyapi\.cn\/v1\/activity\? url echo-response application/json echo-response https://raw.githubusercontent.com/Keywos/rule/main/mocks/caiyun.json
+^https?:\/\/api\.caiyunapp\.com\/v1\/activity url reject-dict
+
+# > 菜鸟裹裹
+# hostname = cn-acs.m.cainiao.com, amdc.m.taobao.com
+# 其他
+^https?:\/\/amdc\.m\.taobao\.com\/amdc\/mobileDispatch$ url script-response-header https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/header.js
+# 首页 好物推荐,商品推广,底部标签页,快递详情页,问卷调查,主页图标
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.adkeyword\.get\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.cncommunity\.my\.station\.query\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.(batch\.show\.v2|index)\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.guoguo\.nbnetflow\.ads\.m?show\.cn url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cainiao.js
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbopen\.miniapp\.recommend\.cpc\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbmensa\.research\.researchservice\.(acquire|event|close)\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(homepage\.merge|tabbar\.marketing)\.get\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.cainiao\.nbpresentation\.(pickup\.empty\.page|protocol\.homepage)\.get\.cn url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cainiao.js
+# 消息中心
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.nbfriend\.message\.conversation\.list\.cn url script-response-body https://raw.githubusercontent.com/RuCu6/QuanX/main/Scripts/cainiao.js
+# 发现页 数字角标 裹裹券
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cnactivitycenter url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.cncreditmarket\.hit\.getactivityhit\.cn url reject-dict
+^https?:\/\/cn-acs\.m\.cainiao\.com\/gw\/mtop\.com\.cainiao\.longquan\.place\.getpageresourcecontent\.cn url reject-dict
+
+# > 钉钉
+# hostname = gw.alicdn.com, img.alicdn.com
+# 误杀少 解决阿里系的开屏 目前测试咸鱼/钉钉 感谢【zzzzzz】分享
+^https?:\/\/(gw|img)\.alicdn\.com\/imgextra\/.+\/[\w!]+\d+-\d+-.+-\b([8-9]\d{2,}|[1-9]\d{3,})\b-\b([5-9]\d{2,}|[1-9]\d{3,})\b url reject-dict
+
+# > 嘀嗒出行
+# hostname = capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com
+# 小程序净化
+^https?:\/\/capis(-\d)?\.didapinche\.com\/adbase url reject
+^https?:\/\/capis(-\d)?\.didapinche\.com\/ad\/ url reject
+^https?:\/\/adx-cn\.anythinktech\.com\/bid url reject-dict
+^https?:\/\/capis(-?\w*)?\.didapinche\.com\/publish\/api\/upgrade url reject-dict
+^https?:\/\/www\.didapinche\.com\/app\/adstat\/ url reject-200
+
+# > 得物
+# hostname = app.dewu.com, cdn.poizon.com
+# 开屏广告 【Runestoner】分享
+^https?:\/\/app\.dewu\.com\/api\/v1\/app\/advertisement url reject
+^https?:\/\/cdn\.poizon\.com\/node-common\/.*.jpg url reject-200
+
+# > 饿了么
+# hostname = elemecdn.com, fuss10.elemecdn.com, cube.elemecdn.com, www1.elecfans.com, nr-op.elemecdn.com
+# 开屏广告
+^https?:\/\/elemecdn\.com\/.+\/sitemap url reject
+^https?:\/\/fuss10\.elemecdn\.com\/.+\/w\/640\/h\/\d{3,4} url reject
+^https?:\/\/fuss10\.elemecdn\.com\/.+\/w\/750\/h\/\d{3,4} url reject
+^https?:\/\/fuss10\.elemecdn\.com\/.+?\.mp4 url reject-img
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_1\d{3},h_2\d{3}\/format,webp\/ url reject
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_6\d{2},h_8\d{2}\/format,webp\/ url reject
+^https?:\/\/cube\.elemecdn\.com\/[\w\/]+\.jpeg\?x-oss-process=image\/resize,m_fill,w_\d{3},h_\d{4}\/format,webp\/ url reject
+^https?:\/\/cube\.elemecdn\.com\/\w\/\w{2}\/\w+mp4\.mp4\? url reject
+^https?:\/\/www1\.elecfans\.com\/www\/delivery\/ url reject
+^https?:\/\/(nr-op|cube)\.elemecdn\.com\/.+\.jpeg\?x-oss-process=image\/resize,m_fill,w_\d{4,},h_\d{4,}\/($|format,webp\/$) url reject
+
