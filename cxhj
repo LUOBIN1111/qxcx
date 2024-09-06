@@ -1,7 +1,7 @@
 hostname = capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com,api.cloud.189.cn,xxyx-client-api.xiaoxiaoyouxuan.com, statistic.live.126.net
 
-
 # > 嘀嗒出行
+# hostname = capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com
 # 小程序净化
 ^https?:\/\/capis(-\d)?\.didapinche\.com\/adbase url reject
 ^https?:\/\/capis(-\d)?\.didapinche\.com\/ad\/ url reject
@@ -10,10 +10,12 @@ hostname = capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com,ap
 ^https?:\/\/www\.didapinche\.com\/app\/adstat\/ url reject-200
 
 # > 天翼云盘
+# hostname = api.cloud.189.cn
 # 感谢【All in 梭哈】分享
 ^https?:\/\/api\.cloud\.189\.cn\/guns\/(img\/recommendedPosition|getOpenscreenBanners) url reject-dict
 
 # > 晓晓优选
+# hostname = xxyx-client-api.xiaoxiaoyouxuan.com, statistic.live.126.net
 # 多余模块
 ^https:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/vajra url reject-dict
 # 弹窗广告
