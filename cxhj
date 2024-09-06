@@ -1,0 +1,25 @@
+# hostname = capis*.didapinche.com, adx-cn.anythinktech.com, www.didapinche.com,api.cloud.189.cn,xxyx-client-api.xiaoxiaoyouxuan.com, statistic.live.126.net
+
+
+# > 嘀嗒出行
+# 小程序净化
+^https?:\/\/capis(-\d)?\.didapinche\.com\/adbase url reject
+^https?:\/\/capis(-\d)?\.didapinche\.com\/ad\/ url reject
+^https?:\/\/adx-cn\.anythinktech\.com\/bid url reject-dict
+^https?:\/\/capis(-?\w*)?\.didapinche\.com\/publish\/api\/upgrade url reject-dict
+^https?:\/\/www\.didapinche\.com\/app\/adstat\/ url reject-200
+
+# > 天翼云盘
+# 感谢【All in 梭哈】分享
+^https?:\/\/api\.cloud\.189\.cn\/guns\/(img\/recommendedPosition|getOpenscreenBanners) url reject-dict
+
+# > 晓晓优选
+# 多余模块
+^https:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/vajra url reject-dict
+# 弹窗广告
+^https?:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/agent_ad url reject
+#^https?:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/newcomer_ad url reject-dict
+# 右下角的悬浮广告
+^https?:\/\/xxyx-client-api\.xiaoxiaoyouxuan\.com\/activity\/show url reject
+# 禁止上报设备信息
+^https?:\/\/statistic\.live\.126\.net\/statics\/report\/common\/form url reject
